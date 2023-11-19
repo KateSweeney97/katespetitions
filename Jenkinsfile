@@ -16,6 +16,9 @@ pipeline{
                 sh "mvn compiler:compile"
             }
         }
+        stage(test){
+
+        }
         stage('exec'){
             steps{
                 sh "mvn exec:java"
