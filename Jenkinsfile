@@ -1,6 +1,10 @@
 pipeline{
     agent any
-    
+    tools{
+        jdk('JDK 17'){
+            install('JDK 17')
+        }
+    }
     stages{
         stage('getproject'){
             steps{
