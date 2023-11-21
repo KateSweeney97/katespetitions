@@ -9,3 +9,4 @@ public class MyController {
         return "Greetings from Spring Boot!";
     }
     }
+
