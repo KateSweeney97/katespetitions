@@ -1,18 +1,15 @@
 package org.example;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/petitions")
-public class MyController {
-    /*@GetMapping("/")
-    public String index() {
-        return "Greetings from Spring Boot!";
-    }*/
+public class PetitionController {
 
     private List<Petition> petitionList = new ArrayList<>(); // In-memory list to store petitions
 
@@ -47,5 +44,6 @@ public class MyController {
         petition.addSignature(name, email);
         return "redirect:/petitions/all";
     }
-}
 
+    // Other methods for viewing/searching specific petitions and their details
+}

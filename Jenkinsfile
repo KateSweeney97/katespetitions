@@ -9,7 +9,7 @@ pipeline{
         }
         stage('Build'){
             steps{
-                sh "mvn clean:clean"
+                sh "mvn clean"
             }
         }
         stage('package'){
@@ -22,9 +22,15 @@ pipeline{
                 echo 'test'
             }
         }
-        stage('exec'){
+        stage('archive'){
             steps{
-                sh "mvn exec:java"
+                archiveArtifacts allowEmptyArchive: true,
+                    artifacts: '**/katespetitions*.war'
+            }
+        }
+        stage('deploy'){
+            steps{
+                sh 'docker build -f Dockerfile -t myapp .
             }
         }
     }
