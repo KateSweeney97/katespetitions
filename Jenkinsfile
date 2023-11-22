@@ -30,7 +30,7 @@ pipeline{
         }
         stage('deploy'){
             steps{
-                sh 'docker build -f Dockerfile -t myapp .
+                sh 'docker build -f Dockerfile -t myapp . '
             }
         }
     }
