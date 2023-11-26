@@ -6,7 +6,7 @@
     </head>
     <body>
         <a th:href="@{/petitions/create}">Click here to create a new Petition!</a>
-        <h1>Every Petition</h1>
+        <h1>Every petition</h1>
         <ul>
             <li th:each="petition : ${petitions}">
                 <a th:href="@{/petitions/{id} (id=${petition.id})}" th:text="${petition.title}"></a>
