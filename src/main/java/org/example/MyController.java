@@ -1,12 +1,13 @@
 package org.example;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/petitions")
 public class MyController {
     /*@GetMapping("/")
@@ -35,17 +36,32 @@ public class MyController {
     }
 
     @GetMapping("/{id}")
-    public String showPetition(@PathVariable int id, Model model) {
-        Petition petition = petitionList.get(id);
-        model.addAttribute("petition", petition);
-        return "single_petition";
+    public String showPetition(@PathVariable String id, Model model) {
+        Petition petition;
+        for (Petition p : petitionList) {
+            System.out.println(p.getId());
+            System.out.println(p.getId().equals(id));
+            if(p.getId().equals(id)) {
+                petition = p;
+                model.addAttribute("petition", petition);
+                return "single_petition";
+            }
+        }
+        return "create_petition";
     }
 
     @PostMapping("/{id}/sign")
-    public String signPetition(@PathVariable int id, @RequestParam String name, @RequestParam String email) {
-        Petition petition = petitionList.get(id);
-        petition.addSignature(name, email);
-        return "redirect:/petitions/all";
+    public String signPetition(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "email") String email) {
+        Petition petition;
+        for (Petition p : petitionList) {
+            if(p.getId().equals(id)) {
+                petition = p;
+                petition.addSignature(name, email);
+                break;
+            }
+        }
+        return "redirect:/petitions";
     }
+
 }
 
